@@ -1,0 +1,76 @@
+{
+    "queries": [
+        {
+            "text": "Who is the man holding the crown?",
+            "requires_image": true
+        },
+        {
+            "text": "What is the woman in the red mantle doing?",
+            "requires_image": true
+        },
+        {
+            "text": "Who was Napoleon's wife?",
+            "requires_image": false
+        }
+    ],
+    "messages": [
+        {
+            "role": "human",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "# Example query image\n"
+                },
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "text",
+                    "text": "\n# Query\nWhat is the color of the woman's mantle?"
+                }
+            ]
+        },
+        {
+            "role": "ai",
+            "content": "<think>\nTo answer this question, I can only use the information present in the image.\n</think>\nThe woman's mantle is red, with some golden details."
+        },
+        {
+            "role": "human",
+            "content": "Describe the event depicted in the image in detail."
+        },
+        {
+            "role": "ai",
+            "content": "<think>\nTo provide a detailed description of the event, I need to determine whether this is a specific historical event and identify the key figures in the image. The main subjects appear to be the man holding the crown and the woman in the red mantle.\n</think>\n<tool_call>\n{\"name\": \"get_relevant_documents\", \"arguments\": {\"query\": \"Who is the man holding the crown?\", \"requires_image\": true}}\n</tool_call>"
+        },
+        {
+            "role": "tool",
+            "name": "get_relevant_documents",
+            "tool_call_id": "call0_shot0",
+            "content": 0
+        },
+        {
+            "role": "ai",
+            "content": "<think>\nMost sources confirm that the central figure in the image is Napoleon Bonaparte. The scene represents the coronation of Napoleon Bonaparte, which took place on December 2, 1804. Next, I need to determine what the woman in the red mantle is doing.\n</think>\n<tool_call>\n{\"name\": \"get_relevant_documents\", \"arguments\": {\"query\": \"What is the woman in the red mantle doing?\", \"requires_image\": true}}\n</tool_call>"
+        },
+        {
+            "role": "tool",
+            "name": "get_relevant_documents",
+            "tool_call_id": "call1_shot0",
+            "content": 1
+        },
+        {
+            "role": "ai",
+            "content": "<think>\nThe woman appears to be the Empress. She is kneeling before Napoleon, awaiting her coronation. To provide a more detailed response, I should verify her identity.\n</think>\n<tool_call>\n{\"name\": \"get_relevant_documents\", \"arguments\": {\"query\": \"Who was Napoleon's wife?\", \"requires_image\": false}}\n</tool_call>"
+        },
+        {
+            "role": "tool",
+            "name": "get_relevant_documents",
+            "tool_call_id": "call2_shot0",
+            "content": 2
+        },
+        {
+            "role": "ai",
+            "content": "<think>\nMost sources confirm that Napoleon's wife was Joséphine de Beauharnais. Using this information, I can now provide a comprehensive response to the user's question.\n</think>\nThis painting illustrates the coronation of Napoleon Bonaparte as Emperor of the French, a ceremony held on December 2, 1804, at Notre-Dame Cathedral in Paris. Likely painted by Jacques-Louis David, the artwork captures the moment when Napoleon crowns his wife, Joséphine de Beauharnais, as Empress. She is depicted kneeling before Napoleon as he prepares to place the crown on her head."
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+/.cache
+/.env
+/.vscode
+/artgraph
+/launch
+/data
+/models
+/out
+/store
+/wandb
+/models/checkpoints
+/wikiextractor
+/.byaldi
+/storage
+/snapshots
+/launches
+__pycache__
