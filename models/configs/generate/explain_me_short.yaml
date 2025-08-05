@@ -1,0 +1,8 @@
+dataset:
+  _target_: artseek.data.datasets.explain_me.ExplainMeDataset
+  data_dir: data/external/explain_me
+  split: test
+prompt: "Explain this painting in detail with three sentences: one about its content, one about its form, and one about its context. The final answer must be in the form of a JSON object with three keys: 'content', 'form', and 'context'."
+out_dir: models/checkpoints/generate/explain_me_short
+classify: true
+retrieve: true

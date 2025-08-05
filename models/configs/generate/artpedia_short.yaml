@@ -1,0 +1,8 @@
+dataset:
+  _target_: artseek.data.datasets.artpedia.ArtpediaDataset
+  data_dir: data/external/artpedia
+  split: test
+prompt: "Explain this painting in detail with three sentences: one about its content and one about its context. The final answer must be in the form of a JSON object with two keys: 'content' and 'context'."
+out_dir: models/checkpoints/generate/artpedia_short
+classify: true
+retrieve: true

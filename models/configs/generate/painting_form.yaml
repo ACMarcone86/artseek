@@ -1,0 +1,8 @@
+dataset:
+  _target_: artseek.data.datasets.painting_form.PaintingFormDataset
+  data_dir: data/external/painting_form
+  split: test
+prompt: "Please compose a coherent paragraph of formal analysis focusing on visual characteristics."
+out_dir: models/checkpoints/generate/painting_form
+classify: true
+retrieve: true

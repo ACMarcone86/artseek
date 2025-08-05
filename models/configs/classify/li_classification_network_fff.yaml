@@ -1,0 +1,81 @@
+tasks:
+  - artist
+  - genre
+  - media
+  - style
+  - tag
+task_types:
+  artist: classification
+  genre: classification
+  media: multi-label
+  style: classification
+  tag: multi-label
+accelerator:
+  log_with: wandb
+  project_dir: models/checkpoints/retrieve/li_classification_network_fff
+model:
+  pretrained_model_name_or_path: models/colqwen2-v1.0
+  torch_dtype: bfloat16
+  attn_implementation: flash_attention_2
+li_classification_network:
+  activation: gelu
+  embedding_dim: 128
+  num_tasks: 5
+  num_encoder_layers: 6
+  nhead: 8
+  dim_feedforward: 2048
+  dropout: 0.1
+  output_dim: 512
+loss:
+  _target_: artseek.method.classify.li_classification_network.SigmoidLoss
+  num_tasks: 5
+optimizer_partial:
+  _partial_: true
+  _target_: torch.optim.AdamW
+  lr: 0.0005
+datasets:
+  train:
+    _target_: artseek.data.datasets.artgraph.ArtGraphClassificationDataset
+    data_dir: data/artgraph
+    label_type: both
+    with_image: false
+    split: train
+  val:
+    _target_: artseek.data.datasets.artgraph.ArtGraphClassificationDataset
+    data_dir: data/artgraph
+    label_type: both
+    with_image: false
+    split: val
+  test:
+    _target_: artseek.data.datasets.artgraph.ArtGraphClassificationDataset
+    data_dir: data/artgraph
+    label_type: both
+    with_image: false
+    split: test
+dataloaders:
+  train:
+    batch_size: 256
+    shuffle: true
+    num_workers: 8
+    persistent_workers: true
+  val:
+    batch_size: 256
+    shuffle: false
+    num_workers: 8
+    persistent_workers: true
+  test:
+    batch_size: 256
+    shuffle: false
+    num_workers: 8
+    persistent_workers: true
+lr_scheduler:
+  name: cosine
+  warmup_ratio: 1.0
+training:
+  class_weighting: false
+  early_stopping_patience: 25
+  loss_weighting: true
+  max_grad_norm: 1.0
+  num_epochs: 25
+  precomputed: true
+  seed: 42
